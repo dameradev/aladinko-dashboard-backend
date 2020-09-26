@@ -62,6 +62,7 @@ const Mutations = {
           date_add: new Date(),
           date_delivery,
           status: "Ordered",
+          pickupTime: args.pickupTime,
           carpets: { create: carpets }
           // totalPrice: totalPriceOrder
         }

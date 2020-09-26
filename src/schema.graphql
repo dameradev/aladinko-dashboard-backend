@@ -10,11 +10,11 @@ type Mutation {
     phoneNumber: String
     address: String
     carpets: [carpetDetailsCreateInput]!
+    pickupTime: String
   ): Carpet!
   deleteCarpet(id: String): Carpet!
   changeStatus(id: String, status: String): Carpet!
 }
-
 
 # project(where: ProjectWhereUniqueInput!): Project
 type Query {

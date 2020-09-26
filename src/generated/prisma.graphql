@@ -1,5 +1,5 @@
 # source: https://aladinko-fe2a4c47e1.herokuapp.com
-# timestamp: Sat Sep 26 2020 18:31:51 GMT+0200 (Central European Summer Time)
+# timestamp: Sat Sep 26 2020 19:19:11 GMT+0200 (Central European Summer Time)
 
 type AggregateCarpet {
   count: Int!
@@ -24,7 +24,9 @@ type Carpet implements Node {
   phoneNumber: Int
   address: String
   carpets(where: carpetDetailsWhereInput, orderBy: carpetDetailsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [carpetDetails!]
-  totalPrice: Int
+  numberOfCarpets: Int
+  totalPrice: Float
+  pickupTime: String
 }
 
 """A connection to a list of items."""
@@ -49,7 +51,9 @@ input CarpetCreateInput {
   status: Status
   phoneNumber: Int
   address: String
-  totalPrice: Int
+  numberOfCarpets: Int
+  totalPrice: Float
+  pickupTime: String
   images: CarpetCreateimagesInput
   carpets: carpetDetailsCreateManyInput
 }
@@ -461,8 +465,12 @@ enum CarpetOrderByInput {
   phoneNumber_DESC
   address_ASC
   address_DESC
+  numberOfCarpets_ASC
+  numberOfCarpets_DESC
   totalPrice_ASC
   totalPrice_DESC
+  pickupTime_ASC
+  pickupTime_DESC
 }
 
 type CarpetPreviousValues {
@@ -474,7 +482,9 @@ type CarpetPreviousValues {
   status: Status
   phoneNumber: Int
   address: String
-  totalPrice: Int
+  numberOfCarpets: Int
+  totalPrice: Float
+  pickupTime: String
 }
 
 type CarpetSubscriptionPayload {
@@ -525,7 +535,9 @@ input CarpetUpdateInput {
   status: Status
   phoneNumber: Int
   address: String
-  totalPrice: Int
+  numberOfCarpets: Int
+  totalPrice: Float
+  pickupTime: String
   images: CarpetUpdateimagesInput
   carpets: carpetDetailsUpdateManyInput
 }
@@ -537,7 +549,9 @@ input CarpetUpdateManyMutationInput {
   status: Status
   phoneNumber: Int
   address: String
-  totalPrice: Int
+  numberOfCarpets: Int
+  totalPrice: Float
+  pickupTime: String
   images: CarpetUpdateimagesInput
 }
 
@@ -746,28 +760,90 @@ input CarpetWhereInput {
 
   """All values not ending with the given string."""
   address_not_ends_with: String
-  totalPrice: Int
+  numberOfCarpets: Int
 
   """All values that are not equal to given value."""
-  totalPrice_not: Int
+  numberOfCarpets_not: Int
 
   """All values that are contained in given list."""
-  totalPrice_in: [Int!]
+  numberOfCarpets_in: [Int!]
 
   """All values that are not contained in given list."""
-  totalPrice_not_in: [Int!]
+  numberOfCarpets_not_in: [Int!]
 
   """All values less than the given value."""
-  totalPrice_lt: Int
+  numberOfCarpets_lt: Int
 
   """All values less than or equal the given value."""
-  totalPrice_lte: Int
+  numberOfCarpets_lte: Int
 
   """All values greater than the given value."""
-  totalPrice_gt: Int
+  numberOfCarpets_gt: Int
 
   """All values greater than or equal the given value."""
-  totalPrice_gte: Int
+  numberOfCarpets_gte: Int
+  totalPrice: Float
+
+  """All values that are not equal to given value."""
+  totalPrice_not: Float
+
+  """All values that are contained in given list."""
+  totalPrice_in: [Float!]
+
+  """All values that are not contained in given list."""
+  totalPrice_not_in: [Float!]
+
+  """All values less than the given value."""
+  totalPrice_lt: Float
+
+  """All values less than or equal the given value."""
+  totalPrice_lte: Float
+
+  """All values greater than the given value."""
+  totalPrice_gt: Float
+
+  """All values greater than or equal the given value."""
+  totalPrice_gte: Float
+  pickupTime: String
+
+  """All values that are not equal to given value."""
+  pickupTime_not: String
+
+  """All values that are contained in given list."""
+  pickupTime_in: [String!]
+
+  """All values that are not contained in given list."""
+  pickupTime_not_in: [String!]
+
+  """All values less than the given value."""
+  pickupTime_lt: String
+
+  """All values less than or equal the given value."""
+  pickupTime_lte: String
+
+  """All values greater than the given value."""
+  pickupTime_gt: String
+
+  """All values greater than or equal the given value."""
+  pickupTime_gte: String
+
+  """All values containing the given string."""
+  pickupTime_contains: String
+
+  """All values not containing the given string."""
+  pickupTime_not_contains: String
+
+  """All values starting with the given string."""
+  pickupTime_starts_with: String
+
+  """All values not starting with the given string."""
+  pickupTime_not_starts_with: String
+
+  """All values ending with the given string."""
+  pickupTime_ends_with: String
+
+  """All values not ending with the given string."""
+  pickupTime_not_ends_with: String
   carpets_every: carpetDetailsWhereInput
   carpets_some: carpetDetailsWhereInput
   carpets_none: carpetDetailsWhereInput

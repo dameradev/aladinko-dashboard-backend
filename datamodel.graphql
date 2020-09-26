@@ -8,7 +8,9 @@ type Carpet {
   phoneNumber: Int
   address: String
   carpets: [carpetDetails]!
-  totalPrice: Int
+  numberOfCarpets: Int
+  totalPrice: Float
+  pickupTime: String
 }
 
 enum Status {
