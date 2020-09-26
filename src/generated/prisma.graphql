@@ -1,0 +1,854 @@
+# source: https://aladinko-fe2a4c47e1.herokuapp.com
+# timestamp: Sat Sep 26 2020 18:31:51 GMT+0200 (Central European Summer Time)
+
+type AggregateCarpet {
+  count: Int!
+}
+
+type AggregatecarpetDetails {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+type Carpet implements Node {
+  id: ID!
+  customer: String!
+  date_add: DateTime!
+  date_delivery: DateTime!
+  images: [String!]!
+  status: Status
+  phoneNumber: Int
+  address: String
+  carpets(where: carpetDetailsWhereInput, orderBy: carpetDetailsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [carpetDetails!]
+  totalPrice: Int
+}
+
+"""A connection to a list of items."""
+type CarpetConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CarpetEdge]!
+  aggregate: AggregateCarpet!
+}
+
+input CarpetCreateimagesInput {
+  set: [String!]
+}
+
+input CarpetCreateInput {
+  id: ID
+  customer: String!
+  date_add: DateTime!
+  date_delivery: DateTime!
+  status: Status
+  phoneNumber: Int
+  address: String
+  totalPrice: Int
+  images: CarpetCreateimagesInput
+  carpets: carpetDetailsCreateManyInput
+}
+
+type carpetDetails implements Node {
+  id: ID!
+  measure: Float
+  pricePerMeter: Float
+  totalPrice: Float
+}
+
+"""A connection to a list of items."""
+type carpetDetailsConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [carpetDetailsEdge]!
+  aggregate: AggregatecarpetDetails!
+}
+
+input carpetDetailsCreateInput {
+  id: ID
+  measure: Float
+  pricePerMeter: Float
+  totalPrice: Float
+}
+
+input carpetDetailsCreateManyInput {
+  create: [carpetDetailsCreateInput!]
+  connect: [carpetDetailsWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type carpetDetailsEdge {
+  """The item at the end of the edge."""
+  node: carpetDetails!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum carpetDetailsOrderByInput {
+  id_ASC
+  id_DESC
+  measure_ASC
+  measure_DESC
+  pricePerMeter_ASC
+  pricePerMeter_DESC
+  totalPrice_ASC
+  totalPrice_DESC
+}
+
+type carpetDetailsPreviousValues {
+  id: ID!
+  measure: Float
+  pricePerMeter: Float
+  totalPrice: Float
+}
+
+input carpetDetailsScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [carpetDetailsScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [carpetDetailsScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [carpetDetailsScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  measure: Float
+
+  """All values that are not equal to given value."""
+  measure_not: Float
+
+  """All values that are contained in given list."""
+  measure_in: [Float!]
+
+  """All values that are not contained in given list."""
+  measure_not_in: [Float!]
+
+  """All values less than the given value."""
+  measure_lt: Float
+
+  """All values less than or equal the given value."""
+  measure_lte: Float
+
+  """All values greater than the given value."""
+  measure_gt: Float
+
+  """All values greater than or equal the given value."""
+  measure_gte: Float
+  pricePerMeter: Float
+
+  """All values that are not equal to given value."""
+  pricePerMeter_not: Float
+
+  """All values that are contained in given list."""
+  pricePerMeter_in: [Float!]
+
+  """All values that are not contained in given list."""
+  pricePerMeter_not_in: [Float!]
+
+  """All values less than the given value."""
+  pricePerMeter_lt: Float
+
+  """All values less than or equal the given value."""
+  pricePerMeter_lte: Float
+
+  """All values greater than the given value."""
+  pricePerMeter_gt: Float
+
+  """All values greater than or equal the given value."""
+  pricePerMeter_gte: Float
+  totalPrice: Float
+
+  """All values that are not equal to given value."""
+  totalPrice_not: Float
+
+  """All values that are contained in given list."""
+  totalPrice_in: [Float!]
+
+  """All values that are not contained in given list."""
+  totalPrice_not_in: [Float!]
+
+  """All values less than the given value."""
+  totalPrice_lt: Float
+
+  """All values less than or equal the given value."""
+  totalPrice_lte: Float
+
+  """All values greater than the given value."""
+  totalPrice_gt: Float
+
+  """All values greater than or equal the given value."""
+  totalPrice_gte: Float
+}
+
+type carpetDetailsSubscriptionPayload {
+  mutation: MutationType!
+  node: carpetDetails
+  updatedFields: [String!]
+  previousValues: carpetDetailsPreviousValues
+}
+
+input carpetDetailsSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [carpetDetailsSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [carpetDetailsSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [carpetDetailsSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: carpetDetailsWhereInput
+}
+
+input carpetDetailsUpdateDataInput {
+  measure: Float
+  pricePerMeter: Float
+  totalPrice: Float
+}
+
+input carpetDetailsUpdateInput {
+  measure: Float
+  pricePerMeter: Float
+  totalPrice: Float
+}
+
+input carpetDetailsUpdateManyDataInput {
+  measure: Float
+  pricePerMeter: Float
+  totalPrice: Float
+}
+
+input carpetDetailsUpdateManyInput {
+  create: [carpetDetailsCreateInput!]
+  connect: [carpetDetailsWhereUniqueInput!]
+  set: [carpetDetailsWhereUniqueInput!]
+  disconnect: [carpetDetailsWhereUniqueInput!]
+  delete: [carpetDetailsWhereUniqueInput!]
+  update: [carpetDetailsUpdateWithWhereUniqueNestedInput!]
+  updateMany: [carpetDetailsUpdateManyWithWhereNestedInput!]
+  deleteMany: [carpetDetailsScalarWhereInput!]
+  upsert: [carpetDetailsUpsertWithWhereUniqueNestedInput!]
+}
+
+input carpetDetailsUpdateManyMutationInput {
+  measure: Float
+  pricePerMeter: Float
+  totalPrice: Float
+}
+
+input carpetDetailsUpdateManyWithWhereNestedInput {
+  where: carpetDetailsScalarWhereInput!
+  data: carpetDetailsUpdateManyDataInput!
+}
+
+input carpetDetailsUpdateWithWhereUniqueNestedInput {
+  where: carpetDetailsWhereUniqueInput!
+  data: carpetDetailsUpdateDataInput!
+}
+
+input carpetDetailsUpsertWithWhereUniqueNestedInput {
+  where: carpetDetailsWhereUniqueInput!
+  update: carpetDetailsUpdateDataInput!
+  create: carpetDetailsCreateInput!
+}
+
+input carpetDetailsWhereInput {
+  """Logical AND on all given filters."""
+  AND: [carpetDetailsWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [carpetDetailsWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [carpetDetailsWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  measure: Float
+
+  """All values that are not equal to given value."""
+  measure_not: Float
+
+  """All values that are contained in given list."""
+  measure_in: [Float!]
+
+  """All values that are not contained in given list."""
+  measure_not_in: [Float!]
+
+  """All values less than the given value."""
+  measure_lt: Float
+
+  """All values less than or equal the given value."""
+  measure_lte: Float
+
+  """All values greater than the given value."""
+  measure_gt: Float
+
+  """All values greater than or equal the given value."""
+  measure_gte: Float
+  pricePerMeter: Float
+
+  """All values that are not equal to given value."""
+  pricePerMeter_not: Float
+
+  """All values that are contained in given list."""
+  pricePerMeter_in: [Float!]
+
+  """All values that are not contained in given list."""
+  pricePerMeter_not_in: [Float!]
+
+  """All values less than the given value."""
+  pricePerMeter_lt: Float
+
+  """All values less than or equal the given value."""
+  pricePerMeter_lte: Float
+
+  """All values greater than the given value."""
+  pricePerMeter_gt: Float
+
+  """All values greater than or equal the given value."""
+  pricePerMeter_gte: Float
+  totalPrice: Float
+
+  """All values that are not equal to given value."""
+  totalPrice_not: Float
+
+  """All values that are contained in given list."""
+  totalPrice_in: [Float!]
+
+  """All values that are not contained in given list."""
+  totalPrice_not_in: [Float!]
+
+  """All values less than the given value."""
+  totalPrice_lt: Float
+
+  """All values less than or equal the given value."""
+  totalPrice_lte: Float
+
+  """All values greater than the given value."""
+  totalPrice_gt: Float
+
+  """All values greater than or equal the given value."""
+  totalPrice_gte: Float
+}
+
+input carpetDetailsWhereUniqueInput {
+  id: ID
+}
+
+"""An edge in a connection."""
+type CarpetEdge {
+  """The item at the end of the edge."""
+  node: Carpet!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CarpetOrderByInput {
+  id_ASC
+  id_DESC
+  customer_ASC
+  customer_DESC
+  date_add_ASC
+  date_add_DESC
+  date_delivery_ASC
+  date_delivery_DESC
+  status_ASC
+  status_DESC
+  phoneNumber_ASC
+  phoneNumber_DESC
+  address_ASC
+  address_DESC
+  totalPrice_ASC
+  totalPrice_DESC
+}
+
+type CarpetPreviousValues {
+  id: ID!
+  customer: String!
+  date_add: DateTime!
+  date_delivery: DateTime!
+  images: [String!]!
+  status: Status
+  phoneNumber: Int
+  address: String
+  totalPrice: Int
+}
+
+type CarpetSubscriptionPayload {
+  mutation: MutationType!
+  node: Carpet
+  updatedFields: [String!]
+  previousValues: CarpetPreviousValues
+}
+
+input CarpetSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CarpetSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CarpetSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CarpetSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CarpetWhereInput
+}
+
+input CarpetUpdateimagesInput {
+  set: [String!]
+}
+
+input CarpetUpdateInput {
+  customer: String
+  date_add: DateTime
+  date_delivery: DateTime
+  status: Status
+  phoneNumber: Int
+  address: String
+  totalPrice: Int
+  images: CarpetUpdateimagesInput
+  carpets: carpetDetailsUpdateManyInput
+}
+
+input CarpetUpdateManyMutationInput {
+  customer: String
+  date_add: DateTime
+  date_delivery: DateTime
+  status: Status
+  phoneNumber: Int
+  address: String
+  totalPrice: Int
+  images: CarpetUpdateimagesInput
+}
+
+input CarpetWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CarpetWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CarpetWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CarpetWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  customer: String
+
+  """All values that are not equal to given value."""
+  customer_not: String
+
+  """All values that are contained in given list."""
+  customer_in: [String!]
+
+  """All values that are not contained in given list."""
+  customer_not_in: [String!]
+
+  """All values less than the given value."""
+  customer_lt: String
+
+  """All values less than or equal the given value."""
+  customer_lte: String
+
+  """All values greater than the given value."""
+  customer_gt: String
+
+  """All values greater than or equal the given value."""
+  customer_gte: String
+
+  """All values containing the given string."""
+  customer_contains: String
+
+  """All values not containing the given string."""
+  customer_not_contains: String
+
+  """All values starting with the given string."""
+  customer_starts_with: String
+
+  """All values not starting with the given string."""
+  customer_not_starts_with: String
+
+  """All values ending with the given string."""
+  customer_ends_with: String
+
+  """All values not ending with the given string."""
+  customer_not_ends_with: String
+  date_add: DateTime
+
+  """All values that are not equal to given value."""
+  date_add_not: DateTime
+
+  """All values that are contained in given list."""
+  date_add_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  date_add_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  date_add_lt: DateTime
+
+  """All values less than or equal the given value."""
+  date_add_lte: DateTime
+
+  """All values greater than the given value."""
+  date_add_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  date_add_gte: DateTime
+  date_delivery: DateTime
+
+  """All values that are not equal to given value."""
+  date_delivery_not: DateTime
+
+  """All values that are contained in given list."""
+  date_delivery_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  date_delivery_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  date_delivery_lt: DateTime
+
+  """All values less than or equal the given value."""
+  date_delivery_lte: DateTime
+
+  """All values greater than the given value."""
+  date_delivery_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  date_delivery_gte: DateTime
+  status: Status
+
+  """All values that are not equal to given value."""
+  status_not: Status
+
+  """All values that are contained in given list."""
+  status_in: [Status!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [Status!]
+  phoneNumber: Int
+
+  """All values that are not equal to given value."""
+  phoneNumber_not: Int
+
+  """All values that are contained in given list."""
+  phoneNumber_in: [Int!]
+
+  """All values that are not contained in given list."""
+  phoneNumber_not_in: [Int!]
+
+  """All values less than the given value."""
+  phoneNumber_lt: Int
+
+  """All values less than or equal the given value."""
+  phoneNumber_lte: Int
+
+  """All values greater than the given value."""
+  phoneNumber_gt: Int
+
+  """All values greater than or equal the given value."""
+  phoneNumber_gte: Int
+  address: String
+
+  """All values that are not equal to given value."""
+  address_not: String
+
+  """All values that are contained in given list."""
+  address_in: [String!]
+
+  """All values that are not contained in given list."""
+  address_not_in: [String!]
+
+  """All values less than the given value."""
+  address_lt: String
+
+  """All values less than or equal the given value."""
+  address_lte: String
+
+  """All values greater than the given value."""
+  address_gt: String
+
+  """All values greater than or equal the given value."""
+  address_gte: String
+
+  """All values containing the given string."""
+  address_contains: String
+
+  """All values not containing the given string."""
+  address_not_contains: String
+
+  """All values starting with the given string."""
+  address_starts_with: String
+
+  """All values not starting with the given string."""
+  address_not_starts_with: String
+
+  """All values ending with the given string."""
+  address_ends_with: String
+
+  """All values not ending with the given string."""
+  address_not_ends_with: String
+  totalPrice: Int
+
+  """All values that are not equal to given value."""
+  totalPrice_not: Int
+
+  """All values that are contained in given list."""
+  totalPrice_in: [Int!]
+
+  """All values that are not contained in given list."""
+  totalPrice_not_in: [Int!]
+
+  """All values less than the given value."""
+  totalPrice_lt: Int
+
+  """All values less than or equal the given value."""
+  totalPrice_lte: Int
+
+  """All values greater than the given value."""
+  totalPrice_gt: Int
+
+  """All values greater than or equal the given value."""
+  totalPrice_gte: Int
+  carpets_every: carpetDetailsWhereInput
+  carpets_some: carpetDetailsWhereInput
+  carpets_none: carpetDetailsWhereInput
+}
+
+input CarpetWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createCarpet(data: CarpetCreateInput!): Carpet!
+  createcarpetDetails(data: carpetDetailsCreateInput!): carpetDetails!
+  updateCarpet(data: CarpetUpdateInput!, where: CarpetWhereUniqueInput!): Carpet
+  updatecarpetDetails(data: carpetDetailsUpdateInput!, where: carpetDetailsWhereUniqueInput!): carpetDetails
+  deleteCarpet(where: CarpetWhereUniqueInput!): Carpet
+  deletecarpetDetails(where: carpetDetailsWhereUniqueInput!): carpetDetails
+  upsertCarpet(where: CarpetWhereUniqueInput!, create: CarpetCreateInput!, update: CarpetUpdateInput!): Carpet!
+  upsertcarpetDetails(where: carpetDetailsWhereUniqueInput!, create: carpetDetailsCreateInput!, update: carpetDetailsUpdateInput!): carpetDetails!
+  updateManyCarpets(data: CarpetUpdateManyMutationInput!, where: CarpetWhereInput): BatchPayload!
+  updateManyCarpetDetailses(data: carpetDetailsUpdateManyMutationInput!, where: carpetDetailsWhereInput): BatchPayload!
+  deleteManyCarpets(where: CarpetWhereInput): BatchPayload!
+  deleteManyCarpetDetailses(where: carpetDetailsWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  carpets(where: CarpetWhereInput, orderBy: CarpetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Carpet]!
+  carpetDetailses(where: carpetDetailsWhereInput, orderBy: carpetDetailsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [carpetDetails]!
+  carpet(where: CarpetWhereUniqueInput!): Carpet
+  carpetDetails(where: carpetDetailsWhereUniqueInput!): carpetDetails
+  carpetsConnection(where: CarpetWhereInput, orderBy: CarpetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CarpetConnection!
+  carpetDetailsesConnection(where: carpetDetailsWhereInput, orderBy: carpetDetailsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): carpetDetailsConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+enum Status {
+  Ordered
+  Processing
+  Delivered
+}
+
+type Subscription {
+  carpet(where: CarpetSubscriptionWhereInput): CarpetSubscriptionPayload
+  carpetDetails(where: carpetDetailsSubscriptionWhereInput): carpetDetailsSubscriptionPayload
+}

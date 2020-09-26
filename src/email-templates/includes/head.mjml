@@ -1,0 +1,36 @@
+<mj-head>
+    <!-- <mj-font name="Muli" href="https://fonts.googleapis.com/css?family=Muli&display=swap" /> -->
+    <mj-font name="sofia-pro" href="https://use.typekit.net/gsq4ccx.css" />
+    
+    <mj-attributes>
+      <mj-all font-family="sofia-pro, Roboto"/>
+      
+      <mj-text  color="#1A1A1A" 
+                font-size="18px" 
+                font-weight="300"
+                line-height="24px"
+                font-family="sofia-pro" />
+      
+      <mj-button  font-size="18px"
+                  inner-padding="15px 50px 20px 60px"
+                  line-height="20px"
+                  font-weight="600"
+                  padding-bottom="40px" 
+                  color="#ffffff" 
+                  background-color="#FF5AB3" 
+                  border-radius="8px"
+                  css-class="float-left"
+                  font-family="sofia-pro" />
+          
+    </mj-attributes>
+
+    <mj-style inline="inline">
+      .float-left {
+        float: left
+      }
+      .border-bottom {
+        border-bottom: 1px solid #E0E0E0
+      }
+    </mj-style>
+
+  </mj-head>

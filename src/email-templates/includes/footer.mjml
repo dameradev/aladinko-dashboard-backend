@@ -1,0 +1,18 @@
+<mj-section background-color="#EBEBEB" padding="30px">
+  <mj-column width="65%">
+
+    <mj-text text-transform="uppercase" color="#8C8C8C" font-family="sofia-pro" font-size="14px" line-height="14px" font-weight="400" letter-spacing="1px">
+      Vprašanja?
+    </mj-text>
+
+    <mj-text color="#8C8C8C" font-size="12px" line-height="12px" font-weight="300">
+      Pošljite nam email <a href="mailto:info@aladinko.si" style="text-decoration:none;color:#2090c0">info@aladinko.si</a>
+      ali pokličite <a href="tel:2124705645" style="text-decoration:none;color:#8C8C8C">069 652 555</a>
+    </mj-text>
+
+  </mj-column>
+
+  <mj-column width="35%">
+    <mj-image src="https://res.cloudinary.com/dvvbls283/image/upload/v1598554240/ylwngoefufigjlma2wqm.png" width="148px" align="right" href="https://perkchops.com" alt="Logo" />
+  </mj-column>
+</mj-section>

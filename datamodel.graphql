@@ -1,0 +1,25 @@
+type Carpet {
+  id: ID! @id
+  customer: String!
+  date_add: DateTime!
+  date_delivery: DateTime!
+  images: [String]! @scalarList(strategy: RELATION)
+  status: Status
+  phoneNumber: Int
+  address: String
+  carpets: [carpetDetails]!
+  totalPrice: Int
+}
+
+enum Status {
+  Ordered
+  Processing
+  Delivered
+}
+
+type carpetDetails {
+  id: ID! @id
+  measure: Float
+  pricePerMeter: Float
+  totalPrice: Float
+}

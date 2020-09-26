@@ -1,0 +1,91 @@
+<mjml>
+
+  <mj-include path="./includes/head.mjml" />
+
+  <mj-body>
+
+    <mj-section background-color="white" padding-bottom="10px">
+
+      <mj-column padding-left="15px" padding-right="0px">
+        <mj-include path="./includes/top-logo.mjml" />
+
+
+        <mj-text padding-bottom="14px">
+          Pozdravljeni {{ customerName }}
+        </mj-text>
+
+        <mj-text font-size="14px" line-height="20px" padding-right="0px">
+
+          <div style="display:inline-block;width:300px;padding-bottom:0px;">
+            <span style="float:left;">Cena storitev</span>
+            <span style="float:right;">{{ totalPrice }}.00 €</span>
+
+          </div>
+
+          <div style="display:inline-block;width:300px;padding-bottom:0px;">
+            <span style="float:left;">Naslov stranke</span>
+            <span style="float:right;">{{ address }}</span>
+          </div>
+
+          <div style="display:inline-block;width:300px;padding-bottom:0px;">
+            <span style="float:left;">Telefonska Številka</span>
+            <span style="float:right;">{{ phoneNumber }}</span>
+          </div>
+
+
+        </mj-text>
+
+      </mj-column>
+
+    </mj-section>
+
+    <mj-section background-color="white">
+
+      <!-- left column -->
+      <mj-column width="53%" padding-left="15px" padding-right="0px">
+
+        <!-- order basic info -->
+        <!-- <mj-image src="https://res.cloudinary.com/dvvbls283/image/upload/v1598554240/ylwngoefufigjlma2wqm.png" width="120px" align="left" alt="Logo" /> -->
+
+
+
+        <!-- dishes header -->
+        <mj-text font-size="12px" line-height="14px" padding-right="0px">
+          <div style=" display:inline-block; width:70%; border-bottom:1px solid #E0E0E0; padding-bottom:4px">
+            <span style="display:inline-block;float:left;text-align:left; width:30%">Meritev Preproge</span>
+            <span style="display:inline-block;float:left;text-align:left; width:35%">Ceno na m<sup>2</sup></span>
+            <span style="display:inline-block;float:left;text-align:right; width:35%">Ceno</span>
+          </div>
+        </mj-text>
+
+        <mj-raw>
+          {{#each carpets }}
+        </mj-raw>
+        <!-- one dish from receipt -->
+        <mj-text font-size="12px" line-height="14px" padding-right="0px">
+          <div style="display:inline-block; width:70%; border-bottom: 1px solid grey;">
+
+            <span style="display:inline-block;float:left;text-align:left; width:30%; font-weight:bold">{{ measure }}m<sup>2</sup></span>
+
+            <span style="display:inline-block;float:left;text-align:left; width:35%; font-weight:bold">{{ pricePerMeter }}.00 eur</span>
+
+            <span style="display:inline-block;float:left;text-align:right; width:35%; font-weight:bold">{{ totalPrice }}.00 eur</span>
+
+        </mj-text>
+
+        <mj-raw>
+          {{/each }}
+        </mj-raw>
+
+
+      </mj-column>
+
+
+
+    </mj-section>
+
+
+    <mj-include path="./includes/footer.mjml" />
+
+  </mj-body>
+</mjml>
