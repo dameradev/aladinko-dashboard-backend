@@ -58,7 +58,7 @@ const Mutations = {
           customer: args.customer,
           phoneNumber: args.phoneNumber,
           address: args.address,
-          images: { set: args.images },
+          images: { set: args.images || [""] },
           date_add: new Date(),
           date_delivery,
           status: "Ordered",
@@ -83,7 +83,6 @@ const Mutations = {
 
     console.log(carpet);
     return carpet;
-
   },
   async deleteCarpet(parent, args, ctx, info) {
     console.log(args);

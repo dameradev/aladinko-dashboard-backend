@@ -3,7 +3,7 @@ type Carpet {
   customer: String!
   date_add: DateTime!
   date_delivery: DateTime!
-  images: [String]! @scalarList(strategy: RELATION)
+  images: [String] @scalarList(strategy: RELATION)
   status: Status
   phoneNumber: Int
   address: String
