@@ -2,6 +2,7 @@
 
 type Mutation {
   createCarpet(
+    id: String
     customer: String
     date_add: DateTime
     date_delivery: DateTime
@@ -19,4 +20,5 @@ type Mutation {
 # project(where: ProjectWhereUniqueInput!): Project
 type Query {
   carpets: [Carpet]!
+  carpet(where: CarpetWhereUniqueInput!): Carpet
 }

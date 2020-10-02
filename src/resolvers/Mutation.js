@@ -8,28 +8,35 @@ var pdf = require("html-pdf");
 
 const Mutations = {
   async createCarpet(parent, args, ctx, info) {
-    console.log(args);
+    console.log(args, "arguments");
 
     let acceptedFile = `${Letters}/new-order-pdf.html`;
 
     let date_delivery = new Date();
     date_delivery.setHours(new Date().getHours() + 48);
 
-    const carpets = args.carpets.map(({ measure, pricePerMeter }) => {
-      return {
-        measure: measure,
-        pricePerMeter: pricePerMeter,
-        totalPrice: measure * pricePerMeter
-      };
-    });
-
+    let carpets = null;
     let totalPriceOrder = 0;
-    carpets.forEach(({ totalPrice }) => {
-      console.log(totalPrice);
-      totalPriceOrder += totalPrice;
-    });
+    if (args.carpets.length) {
+      carpets = args.carpets
+        .map(({ measure, pricePerMeter, id }) => {
+          return {
+            id,
+            measure: measure,
+            pricePerMeter: pricePerMeter,
+            totalPrice: measure * pricePerMeter
+          };
+        })
+        .filter(carpet => !carpet.id);
 
-    console.log(args.phoneNumber);
+      // console.log("carpets", carpets);
+      carpets.forEach(({ totalPrice }) => {
+        console.log(totalPrice);
+        totalPriceOrder += totalPrice;
+      });
+    }
+
+    console.log(carpets);
     let phoneNumber = args.phoneNumber.toString();
     phoneNumber =
       "(" +
@@ -51,37 +58,49 @@ const Mutations = {
 
     let example = await prepareTemplate("new-order-pdf", options);
 
-    console.log("TotalPrice=>", totalPriceOrder);
-    const carpet = await ctx.db.mutation.createCarpet(
-      {
-        data: {
-          customer: args.customer,
-          phoneNumber: args.phoneNumber,
-          address: args.address,
-          images: { set: args.images || [""] },
-          date_add: new Date(),
-          date_delivery,
-          status: "Ordered",
-          pickupTime: args.pickupTime,
-          carpets: { create: carpets }
-          // totalPrice: totalPriceOrder
-        }
-      },
-      info
-    );
+    const data = {
+      customer: args.customer,
+      phoneNumber: args.phoneNumber,
+      address: args.address,
+      images: { set: args.images || [""] },
+      date_add: new Date(),
+      date_delivery,
+      status: "Ordered",
+      pickupTime: args.pickupTime
 
-    pdf
-      .create(example.html)
-      .toFile(
-        `${Letters}/${carpet.id}-${args.customer
-          .replace(/-/g, "")
-          .replace(/ /g, "")}.pdf`,
-        function(err, res) {
-          console.log(res.filename);
-        }
+      // totalPrice: totalPriceOrder
+    };
+
+    let carpet = null;
+    if (args.id) {
+      carpet = await ctx.db.mutation.updateCarpet(
+        {
+          where: { id: args.id },
+          data: { ...data, carpets: { create: carpets } }
+        },
+        info
       );
+    } else {
+      carpet = await ctx.db.mutation.createCarpet(
+        {
+          data: { ...data, carpets: { create: carpets } }
+        },
+        info
+      );
+    }
 
-    console.log(carpet);
+    // pdf
+    //   .create(example.html)
+    //   .toFile(
+    //     `${Letters}/${carpet.id}-${args.customer
+    //       .replace(/-/g, "")
+    //       .replace(/ /g, "")}.pdf`,
+    //     function(err, res) {
+    //       console.log(res.filename);
+    //     }
+    //   );
+
+    // console.log(carpet);
     return carpet;
   },
   async deleteCarpet(parent, args, ctx, info) {
