@@ -19,6 +19,6 @@ type Mutation {
 
 # project(where: ProjectWhereUniqueInput!): Project
 type Query {
-  carpets: [Carpet]!
+  carpets(status: String): [Carpet]!
   carpet(where: CarpetWhereUniqueInput!): Carpet
 }
